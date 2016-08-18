@@ -1,0 +1,36 @@
+product-data-processor:
+    image: product-data-processor
+    container_name: product-data-processor
+    volumes:
+      - /data01/docker-volumes/logs/product-data-processor:/data01/microservice-logs
+    ports:
+      - "11080:11080"
+    links:
+      - cassandra-node1:c1
+      - adi-solr
+adi-solr:
+    image: adi-solr
+    container_name: adi-solr
+    volumes:
+      - /data01/docker-volumes/logs/adi-sorl:/data01/solr/tomcat/logs
+      - /data01/docker-volumes/data/adi-solr:/data01/solr/data
+    ports:
+      - "8080:8080"
+
+#cassandra-node1:
+#    image: cassandra:3.5
+#    container_name: cassandra-node1
+#    volumes:
+#      - /data01/docker-volumes/data/cassandra-3.5-node1:/var/lib/cassandra
+#      - /data01/docker-volumes/logs/cassandra-3.5-node1:/var/log/cassandra
+#    ports:
+#      - "9042:9042"
+
+cassandra-node1:
+    image: adi-cassandra
+    container_name: cassandra-node1
+    volumes:
+      - /data01/docker-volumes/data/adi-cassandra-node1:/opt/cassandra/data
+      - /data01/docker-volumes/logs/adi-cassandra-node1:/opt/cassandra/logs
+    ports:
+      - "9042:9042"

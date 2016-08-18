@@ -1,0 +1,3 @@
+adi-cassandra
+adi-solr
+product-data-processor
